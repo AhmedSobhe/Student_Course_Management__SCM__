@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="iti_student_template">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <style>
+                    .custom-table {
+                        width: 100%;
+                        border-collapse: collapse;
+                    }
+                    .custom-table th, .custom-table td {
+                        padding: 8px;
+                        text-align: left;
+                        border: 1px solid #ddd;
+                    }
+                    .custom-table th {
+                        background-color: #343a40; 
+                        color: white;
+                    }
+                    .custom-table tr:nth-child(even) {
+                        background-color: #f2f2f2; 
+                    }
+                </style>
+                <div class="page">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>name</th>
+                                <th>salary</th>
+                                <th>birth data</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="docs" t-as="o">
+                                <tr>
+                                    <td><span t-field="o.id"/></td>
+                                    <td><span t-field="o.name"/></td>
+                                    <td><span t-field="o.salary"/></td>
+                                    <td><span t-field="o.birth_date"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <record id="iti_student_report" model="ir.actions.report">
+        <field name="name">Students Report</field>
+        <field name="model">iti.student</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="binding_model_id" ref="model_iti_student"/>
+        <field name="binding_type">report</field>
+        <field name="report_name">iti.iti_student_template</field>
+    </record>
+
+</odoo>
